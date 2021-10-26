@@ -12,4 +12,8 @@ productsRouter.get('/:id', ({ params }, response) => {
   response.json(defaultData[params.id]);
 });
 
+productsRouter.post('/', ({ body }, response) => {
+  response.json({ message: 'Successfully posted.', body });
+});
+
 export default productsRouter;
