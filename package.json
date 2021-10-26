@@ -9,7 +9,7 @@
   "scripts": {
     "dev": "nodemon src/index.js",
     "start": "node src/index.js",
-    "lint": "eslint"
+    "lint": "eslint src/**/**"
   },
   "dependencies": {
     "@hapi/boom": "^9.1.4",

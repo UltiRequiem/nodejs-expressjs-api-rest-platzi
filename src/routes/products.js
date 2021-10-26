@@ -1,19 +1,15 @@
 import { Router } from 'express';
 
+import { generateProductsData, defaultData } from '../utils/index.js';
+
 const productsRouter = Router();
 
 productsRouter.get('/', ({ query }, response) => {
-  const data = [
-    { product: 'watermelon' },
-    { product: 'apple' },
-    { product: 'apple pie' },
-  ];
-
-  response.json(query.limit ? data.slice(0, query.limit) : data);
+  response.json(generateProductsData(query.limit || 100));
 });
 
 productsRouter.get('/:id', ({ params }, response) => {
-  response.json({ product: 'apple', id: params.id });
+  response.json(defaultData[params.id]);
 });
 
 export default productsRouter;
