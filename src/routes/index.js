@@ -1,10 +1,11 @@
 import { Router } from 'express';
 
-import { productsRouter } from './v1/index.js';
+import { productsRouter, categoriesRouter } from './v1/index.js';
 
 export function routerV1() {
   const router = Router();
   router.use('/products', productsRouter);
+  router.use('/categories', categoriesRouter);
   return router;
 }
 

@@ -1,6 +1,9 @@
 import { Router } from 'express';
 
-import { generateProductsData, defaultData } from '../../utils/index.js';
+import {
+  generateProductsData,
+  defaultProductsData,
+} from '../../utils/index.js';
 
 const productsRouter = Router();
 
@@ -9,7 +12,7 @@ productsRouter.get('/', ({ query }, response) => {
 });
 
 productsRouter.get('/:id', ({ params }, response) => {
-  response.json(defaultData[params.id]);
+  response.json(defaultProductsData[params.id]);
 });
 
 productsRouter.post('/', ({ body }, response) => {
