@@ -3,15 +3,28 @@
   "env": {},
   "builds": [
     {
-      "src": "backend/build/index.js",
+      "src": "src/index.js",
       "use": "@vercel/node",
       "config": { "includeFiles": ["src/**/**/**"] }
+    },
+    {
+      "src": "ui/**",
+      "use": "@vercel/static",
+      "config": { "includeFiles": ["ui/**"] }
     }
   ],
   "routes": [
     {
-      "src": "/(.*)",
+      "src": "/v1/(.*)",
       "dest": "src/index.js"
+    },
+    {
+      "src": "/",
+      "dest": "ui/index.html"
+    },
+    {
+      "src": "/(.+)",
+      "dest": "ui/$1"
     }
   ]
 }
