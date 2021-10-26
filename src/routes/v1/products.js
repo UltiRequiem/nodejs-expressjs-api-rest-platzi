@@ -1,6 +1,6 @@
 import { Router } from 'express';
 
-import { generateProductsData, defaultData } from '../utils/index.js';
+import { generateProductsData, defaultData } from '../../utils/index.js';
 
 const productsRouter = Router();
 

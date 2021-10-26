@@ -1,2 +1,11 @@
-// eslint-disable-next-line import/prefer-default-export
-export { default as productsRouter } from './products.js';
+import { Router } from 'express';
+
+import { productsRouter } from './v1/index.js';
+
+export function routerV1() {
+  const router = Router();
+  router.use('/products', productsRouter);
+  return router;
+}
+
+export function routerV2() {}
