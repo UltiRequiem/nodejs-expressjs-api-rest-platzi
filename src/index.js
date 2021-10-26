@@ -2,11 +2,11 @@ import express from 'express';
 
 import { PORT } from './config.js';
 
+import { productsRouter } from './routes/index.js';
+
 const app = express();
 
-app.get('/', (request, response) => {
-  response.send({ message: 'Hello, world!' });
-});
+app.use('/products', productsRouter);
 
 app.listen(PORT, () => {
   // eslint-disable-next-line no-console
