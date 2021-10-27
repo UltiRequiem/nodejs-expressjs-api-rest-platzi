@@ -1,5 +1,7 @@
 import faker from 'faker';
 
+import boom from '@hapi/boom';
+
 export default class ProductService {
   constructor() {
     this.products = [];
@@ -33,20 +35,20 @@ export default class ProductService {
   }
 
   findOne(id) {
-    const index = this.products.find((item) => item.id === id);
+    const product = this.products.find((item) => item.id === id);
 
-    if (index === -1) {
-      return { message: `Product ${id} not found.` };
+    if (!product) {
+      throw boom.notFound(`Product ${id} not found.`);
     }
 
-    return index;
+    return product;
   }
 
   update(id, changes) {
     const index = this.products.findIndex((item) => item.id === id);
 
     if (index === -1) {
-      return { message: `Product ${id} not found.` };
+      throw boom.notFound(`Product ${id} not found.`);
     }
 
     this.products[index] = {
@@ -61,7 +63,7 @@ export default class ProductService {
     const index = this.products.findIndex((item) => item.id === id);
 
     if (index === -1) {
-      return { message: `Produt ${id} not found.` };
+      throw boom.notFound(`Product ${id} not found.`);
     }
 
     this.products = this.products.slice(index, 1);

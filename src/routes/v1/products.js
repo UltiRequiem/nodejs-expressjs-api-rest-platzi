@@ -1,5 +1,13 @@
 import { Router } from 'express';
 
+import validationHandler from '../../middlewares/validator.js';
+
+import {
+  createProductSchema,
+  getProductSchema,
+  updateProductSchema,
+} from '../../schemas/product.js';
+
 import ProductService from '../../services/product.js';
 
 const service = new ProductService();
@@ -11,24 +19,41 @@ productsRouter.get('/', ({ query }, response) => {
   response.json(service.find(query.limit));
 });
 
-productsRouter.get('/:id', ({ params }, response, next) => {
-  try {
-    response.json(service.findOne(params.id));
-  } catch (error) {
-    next(error);
-  }
-});
+productsRouter.get(
+  '/:id',
+  validationHandler(getProductSchema, 'params'),
+  ({ params }, response, next) => {
+    try {
+      response.json(service.findOne(params.id));
+    } catch (error) {
+      next(error);
+    }
+  },
+);
 
-productsRouter.post('/', ({ body }, response) => {
-  response.status(201).json(service.create(body));
-});
+productsRouter.post(
+  '/',
+  validationHandler(createProductSchema, 'body'),
+  ({ body }, response) => {
+    response.status(201).json(service.create(body));
+  },
+);
 
-productsRouter.patch('/:id', ({ body, params }, response) => {
-  response.json(service.update(params.id, body));
-});
+productsRouter.patch(
+  '/:id',
+  validationHandler(getProductSchema, 'params'),
+  validationHandler(updateProductSchema, 'body'),
+  ({ body, params }, response) => {
+    response.json(service.update(params.id, body));
+  },
+);
 
-productsRouter.delete('/:id', ({ params }, response) => {
-  response.json(service.delete(params.id));
-});
+productsRouter.delete(
+  '/:id',
+  validationHandler(getProductSchema, 'params'),
+  ({ params }, response) => {
+    response.json(service.delete(params.id));
+  },
+);
 
 export default productsRouter;
