@@ -11,8 +11,12 @@ productsRouter.get('/', ({ query }, response) => {
   response.json(service.find(query.limit));
 });
 
-productsRouter.get('/:id', ({ params }, response) => {
-  response.json(service.findOne(params.id));
+productsRouter.get('/:id', ({ params }, response, next) => {
+  try {
+    response.json(service.findOne(params.id));
+  } catch (error) {
+    next(error);
+  }
 });
 
 productsRouter.post('/', ({ body }, response) => {
