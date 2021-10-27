@@ -1,18 +1,18 @@
 import { Router } from 'express';
 
-import {
-  generateProductsData,
-  defaultProductsData,
-} from '../../utils/index.js';
+import ProductService from '../../services/product.js';
+
+const service = new ProductService();
 
 const productsRouter = Router();
 
-productsRouter.get('/', ({ query }, response) => {
-  response.json(generateProductsData(query.limit || 100));
+// eslint-disable-next-line no-unused-vars
+productsRouter.get('/', ({ _query }, response) => {
+  response.json(service.find());
 });
 
 productsRouter.get('/:id', ({ params }, response) => {
-  response.json(defaultProductsData[params.id]);
+  response.json(service.findOne(params.id));
 });
 
 productsRouter.post('/', ({ body }, response) => {

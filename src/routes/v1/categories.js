@@ -3,7 +3,7 @@ import { Router } from 'express';
 import {
   generateCategoriesData,
   defaultCategoriesData,
-} from '../../utils/index.js';
+} from '../../utils/module.js';
 
 const categoriesRouter = Router();
 
