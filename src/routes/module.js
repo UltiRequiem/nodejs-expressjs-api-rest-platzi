@@ -1,6 +1,6 @@
 import { Router } from 'express';
 
-import { productsRouter, categoriesRouter } from './v1/index.js';
+import { productsRouter, categoriesRouter } from './v1/module.js';
 
 export function routerV1() {
   const router = Router();

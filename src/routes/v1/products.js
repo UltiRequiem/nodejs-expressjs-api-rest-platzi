@@ -6,9 +6,9 @@ const service = new ProductService();
 
 const productsRouter = Router();
 
-// eslint-disable-next-line no-unused-vars
-productsRouter.get('/', ({ _query }, response) => {
-  response.json(service.find());
+productsRouter.get('/', ({ query }, response) => {
+  // eslint-disable-next-line unicorn/no-array-callback-reference
+  response.json(service.find(query.limit));
 });
 
 productsRouter.get('/:id', ({ params }, response) => {
@@ -16,11 +16,15 @@ productsRouter.get('/:id', ({ params }, response) => {
 });
 
 productsRouter.post('/', ({ body }, response) => {
-  response.json({ message: 'Successfully posted.', body });
+  response.status(201).json(service.create(body));
 });
 
 productsRouter.patch('/:id', ({ body, params }, response) => {
-  response.json({ message: 'Successfully posted.', id: params.id, body });
+  response.json(service.update(params.id, body));
+});
+
+productsRouter.delete('/:id', ({ params }, response) => {
+  response.json(service.delete(params.id));
 });
 
 export default productsRouter;
