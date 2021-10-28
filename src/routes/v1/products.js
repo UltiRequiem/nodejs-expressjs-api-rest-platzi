@@ -8,9 +8,7 @@ import {
   updateProductSchema,
 } from '../../schemas/product.js';
 
-import ProductService from '../../services/product.js';
-
-const service = new ProductService();
+import service from '../../services/product.js';
 
 const productsRouter = Router();
 

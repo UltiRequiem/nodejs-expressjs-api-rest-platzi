@@ -4,7 +4,7 @@ export default function validateSchemas(schema, property) {
   // eslint-disable-next-line no-unused-vars
   return (request, response, next) => {
     const data = request[property];
-    const { error } = schema.validate(data);
+    const { error } = schema.validate(data, { abortEarly: false });
 
     if (error) {
       next(boom.badRequest(error));

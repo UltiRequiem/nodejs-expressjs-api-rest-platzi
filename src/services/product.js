@@ -1,8 +1,7 @@
 import faker from 'faker';
-
 import boom from '@hapi/boom';
 
-export default class ProductService {
+class ProductService {
   constructor() {
     this.products = [];
     this.generate();
@@ -71,3 +70,5 @@ export default class ProductService {
     return { message: `${id} deleted correctly.` };
   }
 }
+
+export default new ProductService();

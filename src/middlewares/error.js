@@ -4,6 +4,7 @@ export function logErrors(error, _requt, _response, next) {
   next(error);
 }
 
+// eslint-disable-next-line no-unused-vars
 export function errorHandler(error, _request, response, _next) {
   response.status(500).json({ error, stack: error.stack });
 }
