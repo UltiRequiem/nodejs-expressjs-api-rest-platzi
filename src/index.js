@@ -2,7 +2,7 @@ import express, { json } from 'express';
 import helmet from 'helmet';
 import cors from 'cors';
 
-import { PORT, DEV } from './config.js';
+import { PORT } from './config.js';
 
 import { routerV1 } from './routes/module.js';
 
@@ -16,18 +16,7 @@ const app = express();
 
 app.use(json());
 app.use(helmet());
-app.use(
-  cors({
-    origin: (origin, callback) => {
-      if (!DEV) {
-        // eslint-disable-next-line no-unused-expressions
-        [`http://localhost:${PORT}`].includes(origin) || !origin
-          ? callback(undefined, true)
-          : callback(new Error(`${origin} is not in the whitelist.`));
-      }
-    },
-  }),
-);
+app.use(cors());
 
 app.use('/v1', routerV1());
 
