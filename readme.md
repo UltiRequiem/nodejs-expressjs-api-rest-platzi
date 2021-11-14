@@ -25,3 +25,21 @@ Course link: https://platzi.com/clases/backend-nodejs
 ### `PATCH /products/{number}`
 
 > https://nodejs-expressjs-api-rest-platzi.vercel.app/v1/products/78
+
+## PostgreSQL Notes
+
+Enter to the db by cli:
+
+```sh
+psql -h localhost -d cool_db -U zero_example
+```
+
+Exit to the db by cli:
+
+```sh
+\q
+```
+
+## License
+
+MIT

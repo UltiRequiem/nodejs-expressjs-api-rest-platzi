@@ -1,8 +1,8 @@
 import { Router } from 'express';
 
 import {
-  generateCategoriesData,
   defaultCategoriesData,
+  generateCategoriesData,
 } from '../../utils/module.js';
 
 const categoriesRouter = Router();
