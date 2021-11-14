@@ -12,7 +12,7 @@ const router = Router();
 
 router.get('/', async (_request, response, next) => {
   try {
-    const products = UserService.find();
+    const products = await UserService.find();
     response.json(products);
   } catch (error) {
     next(error);
