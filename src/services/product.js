@@ -1,19 +1,14 @@
 import faker from 'faker';
 import boom from '@hapi/boom';
 
-import PostgresPool from '../libs/postgres.pool.js';
+import sequelize from '../libs/sequelize.js';
 
 class ProductService {
   constructor() {
     this.products = [];
     this.generate();
 
-    this.pool = PostgresPool;
-
-    this.pool.on('error', (error) => {
-      // eslint-disable-next-line no-console
-      console.log(error);
-    });
+    this.db = sequelize;
   }
 
   generate() {
@@ -38,9 +33,9 @@ class ProductService {
     return newProduct;
   }
 
-  async find(limit) {
-    const rta = await this.pool.query('SELECT * FROM tasks');
-    return limit ? rta.rows.slice(0, limit) : rta.rows;
+  async find() {
+    const [data] = await this.db.query('SELECT * FROM tasks');
+    return data;
   }
 
   findOne(id) {
