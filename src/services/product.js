@@ -1,10 +1,19 @@
 import faker from 'faker';
 import boom from '@hapi/boom';
 
+import PostgresPool from '../libs/postgres.pool.js';
+
 class ProductService {
   constructor() {
     this.products = [];
     this.generate();
+
+    this.pool = PostgresPool;
+
+    this.pool.on('error', (error) => {
+      // eslint-disable-next-line no-console
+      console.log(error);
+    });
   }
 
   generate() {
@@ -29,8 +38,9 @@ class ProductService {
     return newProduct;
   }
 
-  find(limit) {
-    return limit ? this.products.slice(0, limit) : this.products;
+  async find(limit) {
+    const rta = await this.pool.query('SELECT * FROM tasks');
+    return limit ? rta.rows.slice(0, limit) : rta.rows;
   }
 
   findOne(id) {

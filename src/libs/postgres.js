@@ -1,13 +1,17 @@
 import pg from 'pg';
 
+import {
+  DB_HOST, DB_NAME, DB_USER, DB_PASSWORD, DB_PORT,
+} from '../config.js';
+
 class Postgres {
   constructor() {
     this.client = new pg.Client({
-      host: 'localhost',
-      database: 'cool_db',
-      user: 'zero_example',
-      password: 'requiem_example',
-      port: 5432,
+      host: DB_HOST,
+      database: DB_NAME,
+      user: DB_USER,
+      password: DB_PASSWORD,
+      port: DB_PORT,
     });
 
     (async () => {

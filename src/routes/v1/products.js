@@ -12,9 +12,9 @@ import service from '../../services/product.js';
 
 const productsRouter = Router();
 
-productsRouter.get('/', ({ query }, response) => {
+productsRouter.get('/', async ({ query }, response) => {
   // eslint-disable-next-line unicorn/no-array-callback-reference
-  response.json(service.find(query.limit));
+  response.json(await service.find(query.limit));
 });
 
 productsRouter.get(

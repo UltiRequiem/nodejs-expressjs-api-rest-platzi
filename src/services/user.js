@@ -1,6 +1,6 @@
 /* eslint-disable class-methods-use-this */
 
-import DBService from '../libs/module.js';
+import DBService from '../libs/postgres.js';
 
 class UserService {
   async create(data) {
