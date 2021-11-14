@@ -1,12 +1,15 @@
 /* eslint-disable class-methods-use-this */
 
+import DBService from '../libs/module.js';
+
 class UserService {
   async create(data) {
     return data;
   }
 
-  static async find() {
-    return [];
+  async find() {
+    const rta = await DBService.client.query('SELECT * FROM tasks');
+    return rta.rows;
   }
 
   async findOne(id) {
