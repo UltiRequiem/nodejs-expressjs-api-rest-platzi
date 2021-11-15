@@ -1,4 +1,6 @@
-import { Model, DataTypes, Sequelize } from 'sequelize';
+import SequelizeLib from 'sequelize';
+
+const { Model, DataTypes, Sequelize } = SequelizeLib;
 
 const USER_TABLE = 'users';
 
