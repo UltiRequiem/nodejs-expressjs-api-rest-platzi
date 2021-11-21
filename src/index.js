@@ -4,7 +4,7 @@ import cors from 'cors';
 
 import { PORT } from './config.js';
 
-import { routerV1 } from './routes/module.js';
+import { routerV1 } from './routes/index.js';
 
 import {
   boomErrorHandler,
