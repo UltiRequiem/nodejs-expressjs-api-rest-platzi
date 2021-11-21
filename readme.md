@@ -1,8 +1,12 @@
-# Express.js Course
+# Express.js and PostgreSQL
 
 ![Cover](./cover.png)
 
-Course link: https://platzi.com/clases/backend-nodejs
+## Start
+
+```sh
+yarn start
+```
 
 ## API
 
@@ -43,3 +47,5 @@ Exit to the db by cli:
 ## License
 
 MIT
+
+> Course link: https://platzi.com/clases/backend-nodejs
