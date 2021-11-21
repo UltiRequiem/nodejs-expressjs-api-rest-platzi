@@ -2,11 +2,10 @@ import SequelizeLib from 'sequelize';
 
 const { Model, DataTypes, Sequelize } = SequelizeLib;
 
-const USER_TABLE = 'users';
+export const USER_TABLE = 'users';
 
-const UserSchema = {
+export const UserSchema = {
   id: {
-    allowNull: false,
     autoIncrement: true,
     primaryKey: true,
     type: DataTypes.INTEGER,
@@ -28,7 +27,7 @@ const UserSchema = {
   },
 };
 
-class User extends Model {
+export class User extends Model {
   static associate() {
     // associate
   }
@@ -42,5 +41,3 @@ class User extends Model {
     };
   }
 }
-
-export { USER_TABLE, UserSchema, User };
