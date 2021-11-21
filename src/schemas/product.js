@@ -1,6 +1,6 @@
 import Joi from 'joi';
 
-const id = Joi.string().uuid();
+const id = Joi.number();
 const image = Joi.string().uri();
 const name = Joi.string().alphanum().min(3).max(15);
 const price = Joi.number().integer().min(10);

@@ -20,9 +20,9 @@ productsRouter.get('/', async (request, response) => {
 productsRouter.get(
   '/:id',
   validationHandler(getProductSchema, 'params'),
-  ({ params }, response, next) => {
+  async ({ params }, response, next) => {
     try {
-      response.json(service.findOne(params.id));
+      response.json(await service.findOne(params.id));
     } catch (error) {
       next(error);
     }

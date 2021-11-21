@@ -13,7 +13,8 @@ class ProductService {
   }
 
   async findOne(id) {
-    const product = await this.find().find((item) => item.id === id);
+    const allProduct = await this.find();
+    const product = allProduct.find((item) => item.id === Number.parseInt(id, 10));
 
     if (!product) {
       throw boom.notFound(`Product ${id} not found.`);
