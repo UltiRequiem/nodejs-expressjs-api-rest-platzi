@@ -1,3 +1,3 @@
 SELECT * FROM task
 
-INSERT INTO task(title, completed) values ('test', false)
+INSERT INTO task(title, completed) values('test', false)
