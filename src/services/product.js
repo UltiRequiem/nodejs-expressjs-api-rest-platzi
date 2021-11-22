@@ -5,11 +5,11 @@ import sequelize from '../libs/sequelize.js';
 class ProductService {
   constructor() {
     this.db = sequelize;
+    this.product = sequelize.models.product;
   }
 
   async find() {
-    const [data] = await this.db.query('SELECT * FROM tasks');
-    return data;
+    return this.product.findAll();
   }
 
   async create({ name }) {

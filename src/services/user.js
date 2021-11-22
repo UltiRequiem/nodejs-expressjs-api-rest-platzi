@@ -1,15 +1,18 @@
 /* eslint-disable class-methods-use-this */
 
-import DBService from '../libs/postgres.js';
+import sequelize from '../libs/sequelize.js';
 
 class UserService {
+  constructor() {
+    this.model = sequelize.models.User;
+  }
+
   async create(data) {
-    return data;
+    return this.model.create(data);
   }
 
   async find() {
-    const rta = await DBService.client.query('SELECT * FROM tasks');
-    return rta.rows;
+    return this.model.findAll();
   }
 
   async findOne(id) {
@@ -17,6 +20,7 @@ class UserService {
   }
 
   async update(id, changes) {
+    const user = this.model.findByPk(id);
     return {
       id,
       changes,

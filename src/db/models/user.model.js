@@ -2,8 +2,6 @@ import SequelizeLib from 'sequelize';
 
 const { Model, DataTypes, Sequelize } = SequelizeLib;
 
-export const USER_TABLE = 'users';
-
 export const UserSchema = {
   id: {
     autoIncrement: true,
@@ -35,7 +33,7 @@ export class User extends Model {
   static config(sequelize) {
     return {
       sequelize,
-      tableName: USER_TABLE,
+      tableName: 'users',
       modelName: 'User',
       timestamps: false,
     };
