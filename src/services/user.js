@@ -16,15 +16,13 @@ class UserService {
   }
 
   async findOne(id) {
-    return { id };
+    return this.model.findByPk(id);
   }
 
   async update(id, changes) {
-    const user = this.model.findByPk(id);
-    return {
-      id,
-      changes,
-    };
+    const user = await this.model.findByPk(id);
+    user.update(changes);
+    return user;
   }
 
   async delete(id) {
