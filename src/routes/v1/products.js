@@ -13,7 +13,7 @@ import service from '../../services/product.js';
 const productsRouter = Router();
 
 // eslint-disable-next-line no-empty-pattern
-productsRouter.get('/', async (request, response) => {
+productsRouter.get('/', async (_request, response) => {
   response.json(await service.find());
 });
 

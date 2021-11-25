@@ -1,5 +1,4 @@
-/* eslint-disable class-methods-use-this */
-
+import boom from '@hapi/boom';
 import sequelize from '../libs/sequelize.js';
 
 class UserService {
@@ -16,17 +15,21 @@ class UserService {
   }
 
   async findOne(id) {
-    return this.model.findByPk(id);
+    const user = await this.model.findByPk(id);
+    if (!user) throw boom.notFound(`User ${id} not found`);
+    return user;
   }
 
   async update(id, changes) {
-    const user = await this.model.findByPk(id);
-    user.update(changes);
+    const user = await this.findOnek(id);
+    await user.update(changes);
     return user;
   }
 
   async delete(id) {
-    return { id };
+    const user = await this.findOne(id);
+    await user.destroy();
+    return user;
   }
 }
 
