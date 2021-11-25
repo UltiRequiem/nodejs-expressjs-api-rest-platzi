@@ -22,11 +22,9 @@ router.get('/', async (_request, response, next) => {
 router.get(
   '/:id',
   validatorHandler(getProductSchema, 'params'),
-  async (request, response, next) => {
+  async ({ params: { id } }, response, next) => {
     try {
-      const { id } = request.params;
-      const product = UserService.findOne(id);
-      response.json(product);
+      response.json(await UserService.findOne(id));
     } catch (error) {
       next(error);
     }
@@ -36,10 +34,9 @@ router.get(
 router.post(
   '/',
   validatorHandler(createProductSchema, 'body'),
-  async (request, response, next) => {
+  async ({ body }, response, next) => {
     try {
-      const { body } = request;
-      const newProduct = UserService.create(body);
+      const newProduct = await UserService.create(body);
       response.status(201).json(newProduct);
     } catch (error) {
       next(error);
@@ -51,11 +48,9 @@ router.patch(
   '/:id',
   validatorHandler(getProductSchema, 'params'),
   validatorHandler(updateProductSchema, 'body'),
-  async (request, response, next) => {
+  async ({ body, params: { id } }, response, next) => {
     try {
-      const { id } = request.params;
-      const { body } = request;
-      const product = UserService.update(id, body);
+      const product = await UserService.update(id, body);
       response.json(product);
     } catch (error) {
       next(error);
@@ -66,10 +61,9 @@ router.patch(
 router.delete(
   '/:id',
   validatorHandler(getProductSchema, 'params'),
-  async (request, response, next) => {
+  async ({ params: { id } }, response, next) => {
     try {
-      const { id } = request.params;
-      UserService.delete(id);
+      await UserService.delete(id);
       response.status(201).json({ id });
     } catch (error) {
       next(error);
