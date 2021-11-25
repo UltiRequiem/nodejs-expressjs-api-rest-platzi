@@ -1,3 +1,5 @@
+import { ValidationError } from 'sequelize';
+
 export function logErrors(error, _requt, _response, next) {
   // eslint-disable-next-line no-console
   console.log(error);
@@ -14,5 +16,15 @@ export function boomErrorHandler(error, _request, response, next) {
     response.json(error.output.payload);
   }
 
+  next(error);
+}
+
+export function ormErrorHandler(error, _request, response, next) {
+  if (error instanceof ValidationError) {
+    response.status(409).json({
+      message: error.name,
+      errors: error.errors,
+    });
+  }
   next(error);
 }

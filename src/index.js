@@ -9,6 +9,7 @@ import { routerV1 } from './routes/index.js';
 import {
   boomErrorHandler,
   errorHandler,
+  ormErrorHandler,
   logErrors,
 } from './middlewares/error.js';
 
@@ -22,6 +23,7 @@ app.use('/v1', routerV1());
 
 app.use(logErrors);
 app.use(boomErrorHandler);
+app.use(ormErrorHandler);
 app.use(errorHandler);
 
 app.listen(PORT, () => {
