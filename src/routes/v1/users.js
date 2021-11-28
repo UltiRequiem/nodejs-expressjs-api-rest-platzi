@@ -1,5 +1,4 @@
 import { Router } from 'express';
-
 import UserService from '../../services/user.js';
 import validatorHandler from '../../middlewares/validator.js';
 import {
@@ -10,10 +9,9 @@ import {
 
 const router = Router();
 
-router.get('/', async (_request, response, next) => {
+router.get('/', async (_request, { json }, next) => {
   try {
-    const products = await UserService.find();
-    response.json(products);
+    json(await UserService.find());
   } catch (error) {
     next(error);
   }
@@ -22,9 +20,9 @@ router.get('/', async (_request, response, next) => {
 router.get(
   '/:id',
   validatorHandler(getProductSchema, 'params'),
-  async ({ params: { id } }, response, next) => {
+  async ({ params: { id } }, { json }, next) => {
     try {
-      response.json(await UserService.findOne(id));
+      json(await UserService.findOne(id));
     } catch (error) {
       next(error);
     }
@@ -34,10 +32,9 @@ router.get(
 router.post(
   '/',
   validatorHandler(createProductSchema, 'body'),
-  async ({ body }, response, next) => {
+  async ({ body }, { status }, next) => {
     try {
-      const newProduct = await UserService.create(body);
-      response.status(201).json(newProduct);
+      status(201).json(await UserService.create(body));
     } catch (error) {
       next(error);
     }
@@ -48,10 +45,9 @@ router.patch(
   '/:id',
   validatorHandler(getProductSchema, 'params'),
   validatorHandler(updateProductSchema, 'body'),
-  async ({ body, params: { id } }, response, next) => {
+  async ({ body, params: { id } }, { json }, next) => {
     try {
-      const product = await UserService.update(id, body);
-      response.json(product);
+      json(await UserService.update(id, body));
     } catch (error) {
       next(error);
     }
@@ -61,10 +57,9 @@ router.patch(
 router.delete(
   '/:id',
   validatorHandler(getProductSchema, 'params'),
-  async ({ params: { id } }, response, next) => {
+  async ({ params: { id } }, { status }, next) => {
     try {
-      await UserService.delete(id);
-      response.status(201).json({ id });
+      status(201).json(await UserService.delete(id));
     } catch (error) {
       next(error);
     }

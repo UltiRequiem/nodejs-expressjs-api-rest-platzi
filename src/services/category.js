@@ -6,20 +6,17 @@ class CategoryService {
   }
 
   async create(data) {
-    const newCategory = await this.model.create(data);
-    return newCategory;
+    return this.model.create(data);
   }
 
   async find() {
-    const categories = await this.model.findAll();
-    return categories;
+    return this.model.findAll();
   }
 
   async findOne(id) {
-    const category = await this.model.findByPk(id, {
+    return this.model.findByPk(id, {
       include: ['products'],
     });
-    return category;
   }
 
   // eslint-disable-next-line class-methods-use-this

@@ -12,17 +12,16 @@ import service from '../../services/product.js';
 
 const productsRouter = Router();
 
-// eslint-disable-next-line no-empty-pattern
-productsRouter.get('/', async (_request, response) => {
-  response.json(await service.find());
+productsRouter.get('/', async (_request, { json }) => {
+  json(await service.find());
 });
 
 productsRouter.get(
   '/:id',
   validationHandler(getProductSchema, 'params'),
-  async ({ params }, response, next) => {
+  async ({ params }, { json }, next) => {
     try {
-      response.json(await service.findOne(params.id));
+      json(await service.findOne(params.id));
     } catch (error) {
       next(error);
     }
@@ -32,8 +31,8 @@ productsRouter.get(
 productsRouter.post(
   '/',
   validationHandler(createProductSchema, 'body'),
-  ({ body }, response) => {
-    response.status(201).json(service.create(body));
+  ({ body }, { status }) => {
+    status(201).json(service.create(body));
   },
 );
 
@@ -41,16 +40,16 @@ productsRouter.patch(
   '/:id',
   validationHandler(getProductSchema, 'params'),
   validationHandler(updateProductSchema, 'body'),
-  ({ body, params }, response) => {
-    response.json(service.update(params.id, body));
+  ({ body, params }, { json }) => {
+    json(service.update(params.id, body));
   },
 );
 
 productsRouter.delete(
   '/:id',
   validationHandler(getProductSchema, 'params'),
-  ({ params }, response) => {
-    response.json(service.delete(params.id));
+  ({ params }, { json }) => {
+    json(service.delete(params.id));
   },
 );
 
