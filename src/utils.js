@@ -17,9 +17,6 @@ export function generateCategoriesData(quantity) {
   }));
 }
 
-export const defaultProductsData = generateProductsData(100);
-export const defaultCategoriesData = generateCategoriesData(100);
-
 export function getEncoded(...strings) {
   return strings.map((string) => encodeURIComponent(string));
 }
