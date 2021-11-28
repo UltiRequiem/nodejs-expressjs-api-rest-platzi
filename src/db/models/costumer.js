@@ -54,9 +54,9 @@ export class Customer extends Model {
     });
   }
 
-  static config(sequelize) {
+  static config(sequelizeInstance) {
     return {
-      sequelize,
+      sequelize: sequelizeInstance,
       tableName: CUSTOMER_TABLE,
       modelName: 'Customer',
       timestamps: false,

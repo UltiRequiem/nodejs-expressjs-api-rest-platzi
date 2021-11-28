@@ -56,9 +56,9 @@ export class Order extends Model {
     });
   }
 
-  static config(sequelize) {
+  static config(sequelizeInstance) {
     return {
-      sequelize,
+      sequelize: sequelizeInstance,
       tableName: ORDER_TABLE,
       modelName: 'Order',
       timestamps: false,

@@ -36,9 +36,9 @@ export class Category extends Model {
     });
   }
 
-  static config(sequelize) {
+  static config(sequelizeInstance) {
     return {
-      sequelize,
+      sequelize: sequelizeInstance,
       tableName: CATEGORY_TABLE,
       modelName: 'Category',
       timestamps: false,

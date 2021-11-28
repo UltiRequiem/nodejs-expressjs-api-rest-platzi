@@ -41,9 +41,9 @@ export class User extends Model {
     });
   }
 
-  static config(sequelize) {
+  static config(sequelizeInstance) {
     return {
-      sequelize,
+      sequelize: sequelizeInstance,
       tableName: USER_TABLE,
       modelName: 'User',
       timestamps: false,

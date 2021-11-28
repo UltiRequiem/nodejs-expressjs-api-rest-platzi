@@ -48,13 +48,14 @@ export const OrderProductSchema = {
 };
 
 export class OrderProduct extends Model {
+  // eslint-disable-next-line no-unused-vars
   static associate(models) {
     //
   }
 
-  static config(sequelize) {
+  static config(sequelizeInstance) {
     return {
-      sequelize,
+      sequelizeInstance,
       tableName: ORDER_PRODUCT_TABLE,
       modelName: 'OrderProduct',
       timestamps: false,

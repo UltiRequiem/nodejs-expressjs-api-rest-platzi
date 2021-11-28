@@ -53,9 +53,9 @@ export class Product extends Model {
     this.belongsTo(models.Category, { as: 'category' });
   }
 
-  static config(sequelize) {
+  static config(sequelizeInstance) {
     return {
-      sequelize,
+      sequelize: sequelizeInstance,
       tableName: PRODUCT_TABLE,
       modelName: 'Product',
       timestamps: false,
