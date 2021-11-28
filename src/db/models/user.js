@@ -1,9 +1,12 @@
-import SequelizeLib from 'sequelize';
+import sequelize from 'sequelize';
 
-const { Model, DataTypes, Sequelize } = SequelizeLib;
+const { Model, DataTypes, Sequelize } = sequelize;
+
+export const USER_TABLE = 'users';
 
 export const UserSchema = {
   id: {
+    allowNull: false,
     autoIncrement: true,
     primaryKey: true,
     type: DataTypes.INTEGER,
@@ -17,6 +20,11 @@ export const UserSchema = {
     allowNull: false,
     type: DataTypes.STRING,
   },
+  role: {
+    allowNull: false,
+    type: DataTypes.STRING,
+    defaultValue: 'customer',
+  },
   createdAt: {
     allowNull: false,
     type: DataTypes.DATE,
@@ -26,14 +34,17 @@ export const UserSchema = {
 };
 
 export class User extends Model {
-  static associate() {
-    // associate
+  static associate(models) {
+    this.hasOne(models.Customer, {
+      as: 'customer',
+      foreignKey: 'userId',
+    });
   }
 
   static config(sequelize) {
     return {
       sequelize,
-      tableName: 'users',
+      tableName: USER_TABLE,
       modelName: 'User',
       timestamps: false,
     };
