@@ -1,6 +1,6 @@
 import sequelize from 'sequelize';
 
-export function logErrors(error, _requt, _response, next) {
+export function logErrors(error, _request, _response, next) {
   // eslint-disable-next-line no-console
   console.log(error);
   next(error);
